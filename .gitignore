@@ -1,0 +1,33 @@
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+dist/
+.astro/
+out/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional databases
+*.sqlite
+*.db
+
+# Redis persistence (if used locally)
+dump.rdb
+appendonly.aof
+
+# IDE / Editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
