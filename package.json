@@ -12,5 +12,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.6"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^4.1.0",
+    "preact": "^10.26.9"
   }
 }
