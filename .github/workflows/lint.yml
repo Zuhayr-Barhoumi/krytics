@@ -30,7 +30,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install project deps
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Run Biome lint
         run: pnpm biome check .
