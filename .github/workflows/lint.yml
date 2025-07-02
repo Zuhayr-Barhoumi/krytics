@@ -33,7 +33,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run Biome lint
-        run: pnpm exec biome check .
+        run: pnpm biome check .
       
       - name: Upload report on failure
         if: failure()
