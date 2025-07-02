@@ -13,32 +13,31 @@ jobs:
     strategy:
       matrix:
         node-version: [20]
-      
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 10
-        
+
     - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
-    
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 10
 
     - name: Install dependencies
       run: pnpm install
-      
+
     - name: Install Biome
       run: pnpm add -D -E @biomejs/biome
-      
+
     - name: Run Biome check
       run: pnpm biome check .
-      
+
     - name: Upload diagnostics report (if errors)
       if: ${{ failure() }}
       uses: actions/upload-artifact@v4
