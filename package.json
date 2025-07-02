@@ -1,16 +1,11 @@
 {
-	"name": "krytics-monorepo",
-	"workspaces": [
-		"backend",
-		"frontend",
-		"tracking"
-	],
-	"scripts": {
-		"lint": "biome lint backend frontend tracking",
-		"format": "format --write backend frontend tracking",
-		"check": "biome check backend frontend tracking"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.0.6"
-	}
+  "name": "krytics-monorepo",
+  "scripts": {
+    "lint": "biome lint backend frontend tracking",
+    "format": "biome format --write backend frontend tracking",
+    "check": "biome check backend frontend tracking"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.6"
+  }
 }
