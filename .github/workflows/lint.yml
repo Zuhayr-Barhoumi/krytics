@@ -16,9 +16,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: List files after checkout
-        run: ls -laR
+        
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -33,7 +31,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install project deps
-        run: pnpm install --frozen-lockfile --loglevel verbose
+        run: pnpm install --frozen-lockfile
 
       - name: Run Biome lint
         run: pnpm biome check . > biome-output.log 2>&1
