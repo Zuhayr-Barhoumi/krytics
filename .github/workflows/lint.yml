@@ -2,47 +2,38 @@ name: Lint Project
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   lint:
-    name: Run Biome linter
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'pnpm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 10
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10          # or omit to use package.json's "packageManager" setting :contentReference[oaicite:2]{index=2}
 
-    - name: Install dependencies --forzen-lockfile
-      run: pnpm install
+      - name: Install project deps
+        run: pnpm install --frozen-lockfile
 
-    - name: Install Biome
-      run: pnpm add -D -E @biomejs/biome
-
-    - name: Run Biome check
-      run: pnpm biome check .
-
-    - name: Upload diagnostics report (if errors)
-      if: ${{ failure() }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: biome-lint-report
-        path: |
-          biome.json
-          biome-output.log
+      - name: Run Biome lint
+        run: pnpm exec biome check .
+      
+      - name: Upload report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: biome-lint-report
+          path: biome-output.log
