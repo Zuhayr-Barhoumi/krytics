@@ -9,21 +9,25 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        node-version: [20]
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10          # or omit to use package.json's "packageManager" setting :contentReference[oaicite:2]{index=2}
+          version: 10
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install project deps
         run: pnpm install --frozen-lockfile
