@@ -12,6 +12,7 @@
   "packageManager": "pnpm@10.9.0",
   "dependencies": {
     "@fastify/rate-limit": "^10.3.0",
+    "@prisma/client": "6.11.0",
     "bcrypt": "^6.0.0",
     "bullmq": "^5.56.0",
     "fastify": "^5.4.0",
